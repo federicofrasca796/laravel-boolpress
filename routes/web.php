@@ -21,6 +21,10 @@ Route::get('/', function () {
 Route::resource('products', ProductController::class)->only([
     'index', 'show'
 ]);
+Route::resource('posts', PostController::class)->only([
+    'index', 'show'
+]);
+
 
 Auth::routes();
 

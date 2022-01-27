@@ -8,19 +8,19 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Header</th>
-                        <th scope="col">Header</th>
-                        <th scope="col">Header</th>
-                        <th scope="col">Header</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Qty</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>{{ $product->id }}</td>
+                        <td><img src="{{ $product->image }}" alt=""></td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->price }}</td>
-                        <td>{{ $product->id }}</td>
-                        <td>{{ $product->id }}</td>
+                        <td>{{ $product->qty }}</td>
                     </tr>
                 </tbody>
             </table>

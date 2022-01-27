@@ -66,8 +66,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-shopping-bag    "></i>
+                                <a class="nav-link" href="{{ route('admin.products.index') }}">
+                                    <i class="fas fa-shopping-bag"></i>
                                     Products
                                 </a>
                             </li>
