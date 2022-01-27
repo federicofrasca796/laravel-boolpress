@@ -31,4 +31,5 @@ Auth::routes();
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::resource('products', ProductController::class);
+    Route::resource('posts', PostController::class);
 });
