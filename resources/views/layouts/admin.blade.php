@@ -60,19 +60,22 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">
+                                <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}"
+                                    aria-current="page" href="{{ route('admin.dashboard') }}">
                                     <i class="fas fa-space-shuttle"></i>
                                     Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.products.index') }}">
+                                <a class="nav-link {{ Route::currentRouteName() == 'admin.products.index' ? 'active' : '' }}"
+                                    href="{{ route('admin.products.index') }}">
                                     <i class="fas fa-shopping-bag"></i>
                                     Products
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link {{ Route::currentRouteName() == 'admin.posts.index' ? 'active' : '' }}"
+                                    href="{{ route('admin.posts.index') }}">
                                     <i class="fas fa-users"></i>
                                     Users
                                 </a>
