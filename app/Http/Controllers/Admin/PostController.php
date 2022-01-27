@@ -70,7 +70,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -82,7 +82,17 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:200',
+            'cover' => 'nullable',
+            'sub_title' => 'nullable',
+            'body' => 'nullable'
+        ]);
+
+        $validated['slug'] = Str::slug($validated['title']);
+
+        $post->update($validated);
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -93,6 +103,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->back()->with('message', "You deleted record n. $post->id");
     }
 }

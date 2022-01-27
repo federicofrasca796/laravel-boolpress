@@ -30,14 +30,42 @@
                             <a href="{{ route('admin.posts.edit', $post->id) }}" class="link-secondary">
                                 <i class="fas fa-pen"></i>
                             </a>
-                            <a href="{{ route('admin.posts.destroy', $post->id) }}" class="link-danger">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+
+                            {{-- <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#post_delete_{{ $post->id }}">
+                                <i class="fas fa-trash-alt link-danger"></i>
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="#post_delete_{{ $post->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="#post_delete_{{ $post->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete "{{ $post->title }}" ?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Confirm? This action is irreversible.
+                                        </div>
+                                        <div class="modal-footer"> --}}
+                            <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger text-white">Delete</button>
+                            </form>
+                            {{-- </div> --}}
+    </div>
+    </div>
+    </div>
+
+    </td>
+    </tr>
+    @endforeach
+    </tbody>
+    </table>
     </div>
 
 @endsection
