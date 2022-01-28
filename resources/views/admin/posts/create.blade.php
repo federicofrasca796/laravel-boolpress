@@ -21,6 +21,16 @@
         </div>
 
         <div class="mb-3">
+            <label for="category_id" class="form-label">Categories</label>
+            <select class="form-select" name="category_id" id="category_id">
+                <option selected>Select one</option>
+                @foreach ($categories as $cat)
+                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="cover" class="form-label">Post cover</label>
             <input type="text" class="form-control" name="cover" id="cover" aria-describedby="helpId"
                 placeholder="https://..." value="{{ old('cover') }}">
