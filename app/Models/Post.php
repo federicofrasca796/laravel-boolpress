@@ -7,9 +7,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 {
+    protected $fillable = ['cover', 'title', 'slug', 'sub_title', 'body', 'category_id'];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
-    protected $fillable = ['cover', 'title', 'slug', 'sub_title', 'body', 'category_id'];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
