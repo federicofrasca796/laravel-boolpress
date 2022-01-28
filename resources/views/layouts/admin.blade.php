@@ -62,22 +62,22 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}"
                                     aria-current="page" href="{{ route('admin.dashboard') }}">
-                                    <i class="fas fa-space-shuttle"></i>
+                                    <i class="fas fa-space-shuttle me-2"></i>
                                     Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ Route::currentRouteName() == 'admin.products.index' ? 'active' : '' }}"
                                     href="{{ route('admin.products.index') }}">
-                                    <i class="fas fa-shopping-bag"></i>
+                                    <i class="fas fa-shopping-bag me-2"></i>
                                     Products
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ Route::currentRouteName() == 'admin.posts.index' ? 'active' : '' }}"
                                     href="{{ route('admin.posts.index') }}">
-                                    <i class="fas fa-users"></i>
-                                    Users
+                                    <i class="fas fa-sticky-note me-2"></i>
+                                    Posts
                                 </a>
                             </li>
                         </ul>
