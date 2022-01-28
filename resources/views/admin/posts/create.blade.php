@@ -23,9 +23,18 @@
         <div class="mb-3">
             <label for="category_id" class="form-label">Categories</label>
             <select class="form-select" name="category_id" id="category_id">
-                <option selected>Select categories</option>
+                <option value="" selected>Select categories</option>
                 @foreach ($categories as $cat)
                     <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="tags" class="form-label">Tags</label>
+            <select multiple class="form-select" name="tags[]" id="tags">
+                @foreach ($tags as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                 @endforeach
             </select>
         </div>

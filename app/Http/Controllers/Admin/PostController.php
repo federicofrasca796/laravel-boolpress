@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -27,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create', ['categories' => Category::all()]);
+        return view('admin.posts.create', ['categories' => Category::all(), 'tags' => Tag::all()]);
     }
 
     /**
@@ -44,12 +45,16 @@ class PostController extends Controller
             'cover' => 'nullable',
             'sub_title' => 'nullable',
             'body' => 'nullable',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
         // ddd($validated);
-        Post::create($validated);
+
+        $new_post = Post::create($validated);
+        $new_post->tags()->attach($validated['tags']);
+
         return redirect()->route('admin.posts.index');
     }
 
@@ -73,7 +78,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -91,12 +97,14 @@ class PostController extends Controller
             'cover' => 'nullable',
             'sub_title' => 'nullable',
             'body' => 'nullable',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
 
         $post->update($validated);
+        $post->tags()->sync($validated['tags']);
         return redirect()->route('admin.posts.index');
     }
 

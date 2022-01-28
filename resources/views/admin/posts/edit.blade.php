@@ -24,13 +24,23 @@
         <div class="mb-3">
             <label for="category_id" class="form-label">Categories</label>
             <select class="form-select" name="category_id" id="category_id">
-                <option value="null">No category</option>
+                <option value="">No category</option>
 
                 @foreach ($categories as $cat)
                     <option value="{{ $cat->id }}"
                         {{ $cat->id == old('category', $post->category_id) ? 'selected' : '' }}>
                         {{ $cat->name }}
                     </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="tags" class="form-label">Tags</label>
+            <select multiple class="form-select" name="tags[]" id="tags">
+                @foreach ($tags as $tag)
+                    <option value="{{ $tag->id }}" {{ $post->tags->contains($tag->id) ? 'selected' : '' }}>
+                        {{ $tag->name }}</option>
                 @endforeach
             </select>
         </div>
