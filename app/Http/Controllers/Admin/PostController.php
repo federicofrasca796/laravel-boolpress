@@ -39,7 +39,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // ddd($request->all());
+        ddd($request->all());
         $validated = $request->validate([
             'title' => 'required|max:200',
             'cover' => 'nullable',
