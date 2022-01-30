@@ -39,21 +39,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        ddd($request->all());
+        // ddd($request->all());
         $validated = $request->validate([
             'title' => 'required|max:200',
             'cover' => 'nullable',
             'sub_title' => 'nullable',
             'body' => 'nullable',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
         // ddd($validated);
-
         $new_post = Post::create($validated);
-        $new_post->tags()->attach($validated['tags']);
+
+        if ($request->has('tags')) {
+            $request->validate([
+                'tags' => 'nullable|exists:tags,id',
+            ]);
+        };
+        $new_post->tags()->attach($request->tags);
 
         return redirect()->route('admin.posts.index');
     }

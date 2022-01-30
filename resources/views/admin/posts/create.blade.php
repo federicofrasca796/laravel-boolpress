@@ -33,7 +33,7 @@
         <div class="mb-3">
             <label for="tags" class="form-label">Tags</label>
             <select multiple class="form-select" name="tags[]" id="tags">
-                {{-- <option value="">None</option> --}}
+                {{-- <option value=""> </option> --}}
                 @foreach ($tags as $tag)
                     <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                 @endforeach
