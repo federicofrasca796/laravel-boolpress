@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -18,7 +19,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index', ['posts' => Post::all()]);
+        // ddd(Auth::user()->posts()->get());
+        $posts = Auth::user()->posts()->get();
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -49,7 +52,9 @@ class PostController extends Controller
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
-        // ddd($validated);
+        // ddd(Auth::user()->id);
+        $validated['user_id'] = Auth::id();
+
         $new_post = Post::create($validated);
 
         if ($request->has('tags')) {
