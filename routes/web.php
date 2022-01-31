@@ -25,6 +25,7 @@ Route::resource('posts', PostController::class)->only([
     'index', 'show'
 ]);
 
+Route::get('categories/{category}/posts', 'CategoryController@post')->name('categories.posts');
 
 Auth::routes();
 
