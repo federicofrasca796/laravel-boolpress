@@ -9,8 +9,8 @@ class TagController extends Controller
 {
     public function posts(Tag $tag)
     {
-        // $posts = $tag->posts()->orderByDesc('id')->paginate(10);
-        // return view('guest.tags.posts', compact('posts', 'tag'));
+        $posts = $tag->posts()->orderByDesc('id')->get();
+        return view('guest.tags.posts', compact('posts', 'tag'));
     }
     /**
      * Display a listing of the resource.

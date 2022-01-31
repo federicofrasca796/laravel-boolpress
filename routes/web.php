@@ -26,6 +26,7 @@ Route::resource('posts', PostController::class)->only([
 ]);
 
 Route::get('categories/{category}/posts', 'CategoryController@post')->name('categories.posts');
+Route::get('tags/{tag}/posts', 'TagController@posts')->name('tags.posts');
 
 Auth::routes();
 
