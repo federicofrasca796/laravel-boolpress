@@ -28,6 +28,9 @@ Route::resource('posts', PostController::class)->only([
 Route::get('categories/{category}/posts', 'CategoryController@post')->name('categories.posts');
 Route::get('tags/{tag}/posts', 'TagController@posts')->name('tags.posts');
 
+Route::get('contacts', 'ContactController@show_contact_page')->name('contacts');
+Route::post('contacts', 'ContactController@sendContactForm')->name('contacts.send');
+
 Auth::routes();
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->group(function () {

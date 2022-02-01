@@ -47,9 +47,9 @@
                             <a class="nav-link"
                                 href="{{ route('products.index') }}">{{ __('Products') }}</a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="#">{{ __('Shop') }}</a>
-                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('contacts') }}">{{ __('Contact us') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
