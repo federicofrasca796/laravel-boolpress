@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -51,17 +52,20 @@ class PostController extends Controller
             'category_id' => 'nullable|exists:categories,id',
         ]);
 
-        $validated['slug'] = Str::slug($validated['title']);
-        // ddd(Auth::user()->id);
-        $validated['user_id'] = Auth::id();
-
-        $new_post = Post::create($validated);
-
         if ($request->has('tags')) {
             $request->validate([
                 'tags' => 'nullable|exists:tags,id',
             ]);
         };
+        $validated['slug'] = Str::slug($validated['title']);
+        // ddd(Auth::user()->id);
+        $validated['user_id'] = Auth::id();
+
+        // ddd($request->file('cover_file'));
+        if ($request->file('cover_file')) {
+            $validated['cover'] = Storage::put('post_covers', $request->cover_file);
+        }
+        $new_post = Post::create($validated);
         $new_post->tags()->attach($request->tags);
 
         return redirect()->route('admin.posts.index');
@@ -100,20 +104,33 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        // ddd($request->all());
         $validated = $request->validate([
             'title' => 'required|max:200',
             'cover' => 'nullable',
             'sub_title' => 'nullable',
             'body' => 'nullable',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
 
+
+        // ddd($request->all(), $validated);
+        if ($request->has('tags')) {
+            $request->validate([
+                'tags' => 'nullable|exists:tags,id',
+            ]);
+            $post->tags()->sync($request->tags);
+        };
+
+
+        // ddd($request->all());
+        if ($request->file('cover_file')) {
+            Storage::delete($post->cover);
+            $validated['cover'] = Storage::put('post_covers', $request->cover_file);
+        }
         $post->update($validated);
-        $post->tags()->sync($validated['tags']);
+
         return redirect()->route('admin.posts.index');
     }
 
@@ -125,6 +142,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        Storage::delete($post->cover);
         $post->delete();
 
         return redirect()->back()->with('message', "You deleted record n. $post->id");

@@ -20,7 +20,9 @@
                 @foreach ($posts as $post)
                     <tr>
                         <td>{{ $post->id }}</td>
-                        <td width="80px"><img class="w-100" src="{{ $post->cover }}" alt=""></td>
+                        <td width="80px"><img class="w-100" src="{{ asset('storage/' . $post->cover) }}"
+                                alt="{{ $post->title }}">
+                        </td>
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->sub_title }}</td>
                         <td>

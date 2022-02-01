@@ -10,7 +10,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('admin.posts.store') }}" method="post">
+    <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -40,10 +40,18 @@
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="cover" class="form-label">Post cover</label>
-            <input type="text" class="form-control" name="cover" id="cover" aria-describedby="helpId"
-                placeholder="https://..." value="{{ old('cover') }}">
+        <div class="row mb-3">
+            <div class="form-label">Post cover</div>
+            {{-- <div class="col-6">
+                <label for="cover_url" class="form-label">URL</label>
+                <input type="text" class="form-control" name="cover_url" id="cover_url" aria-describedby="helpId"
+                    placeholder="https://..." value="{{ old('cover') }}">
+            </div> --}}
+            <div class="col-6">
+                <label for="cover_file" class="form-label">From file</label>
+                <input type="file" class="form-control" name="cover_file" id="cover_file" aria-describedby="helpId"
+                    placeholder="https://..." value="{{ old('cover') }}">
+            </div>
         </div>
 
         <div class="mb-3">
