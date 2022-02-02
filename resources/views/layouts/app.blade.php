@@ -41,7 +41,11 @@
                             <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('posts.index') }}">{{ __('Blog') }}</a>
+                            <a class="nav-link" href="{{ route('posts.index') }}">{{ __('Posts') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{{ route('guest.blog.index') }}">{{ __('Blog (via api)') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"

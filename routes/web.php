@@ -25,6 +25,10 @@ Route::resource('posts', PostController::class)->only([
     'index', 'show'
 ]);
 
+Route::get('blog', function () {
+    return view('guest.blog.index');
+})->name('guest.blog.index');
+
 Route::get('categories/{category}/posts', 'CategoryController@post')->name('categories.posts');
 Route::get('tags/{tag}/posts', 'TagController@posts')->name('tags.posts');
 
