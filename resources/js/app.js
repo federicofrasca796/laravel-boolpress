@@ -15,6 +15,7 @@ Vue.use(VueRouter);
 //1. Define components
 const Home = Vue.component('Home', require('./pages/Home.vue').default);
 const Blog = Vue.component('Blog', require('./pages/Blog.vue').default);
+const Post = Vue.component('Post', require('./pages/Post.vue').default);
 
 //2. Map routes to components
 const routes = [
@@ -27,6 +28,11 @@ const routes = [
         path: '/blog',
         name: 'blog',
         component: Blog
+    },
+    {
+        path: '/blog/:id',
+        name: 'post',
+        component: Post
     },
 ];
 

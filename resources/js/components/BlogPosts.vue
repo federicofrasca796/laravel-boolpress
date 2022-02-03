@@ -21,6 +21,9 @@
                 >{{ tags.name }} -
               </span>
             </div>
+            <router-link :to="'/blog/' + post.id" class="btn btn-primary"
+              >See more...</router-link
+            >
           </div>
         </div>
       </div>
@@ -30,22 +33,14 @@
 
 <script>
 export default {
+  props: {
+    posts: Array,
+  },
   data() {
     return {
-      posts: null,
+      //   posts: null,
     };
   },
-  mounted() {
-    axios
-      .get("api/posts")
-      .then((r) => {
-        // console.log(r);
-        this.posts = r.data.data;
-      })
-      .catch((e) => {
-        console.error("Error:" + e);
-      });
-    console.log("Component mounted.");
-  },
+  mounted() {},
 };
 </script>
