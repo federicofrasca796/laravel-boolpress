@@ -17,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
         // return Post::first();
-        return new PostResource(Post::with(['category', 'tags'])->paginate(10));
+        return new PostResource(Post::with(['category', 'tags'])->orderBy('id', 'DESC')->paginate(15));
     }
 
     /**
