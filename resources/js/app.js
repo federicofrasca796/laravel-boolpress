@@ -8,6 +8,34 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+//0. Vue Router install
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+
+//1. Define components
+const Home = Vue.component('Home', require('./pages/Home.vue').default);
+const Blog = Vue.component('Blog', require('./pages/Blog.vue').default);
+
+//2. Map routes to components
+const routes = [
+    {
+        path: '/',
+        name: 'home',
+        component: Home
+    },
+    {
+        path: '/blog',
+        name: 'blog',
+        component: Blog
+    },
+];
+
+//3. Initialiaze router istance
+const router = new VueRouter({
+    mode: 'history',
+    routes,
+});
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -30,4 +58,6 @@ Vue.component('blog-posts', require('./components/BlogPosts.vue').default);
 
 const app = new Vue({
     el: '#app',
+    //4. Router injection
+    router
 });

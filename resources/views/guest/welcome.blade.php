@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.spa')
 
 @section('content')
 
-    <h1>Welcome</h1>
+    <router-view></router-view>
+
 @endsection

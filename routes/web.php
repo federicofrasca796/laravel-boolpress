@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('guest.welcome');
 })->name('home');
 
+/* 
 Route::resource('products', ProductController::class)->only([
     'index', 'show'
 ]);
@@ -25,16 +26,17 @@ Route::resource('posts', PostController::class)->only([
     'index', 'show'
 ]);
 
+OLD ROUTE. Replaced by Single-Page-Application approach
 Route::get('blog', function () {
     return view('guest.blog.index');
-})->name('guest.blog.index');
+})->name('guest.blog.index'); 
 
 Route::get('categories/{category}/posts', 'CategoryController@post')->name('categories.posts');
 Route::get('tags/{tag}/posts', 'TagController@posts')->name('tags.posts');
 
 Route::get('contacts', 'ContactController@show_contact_page')->name('contacts');
 Route::post('contacts', 'ContactController@sendContactForm')->name('contacts.send');
-
+*/
 Auth::routes();
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->group(function () {
@@ -42,3 +44,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
     Route::resource('products', ProductController::class);
     Route::resource('posts', PostController::class);
 });
+
+Route::get('/{any}', function () {
+    return view('guest.welcome');
+})->where('any', '.*');
