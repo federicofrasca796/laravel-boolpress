@@ -41765,29 +41765,36 @@ var render = function () {
                 "ul",
                 { staticClass: "pagination justify-content-center my-5" },
                 [
-                  _c("li", { staticClass: "page-item" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "page-link",
-                        attrs: { href: "#", "aria-label": "Previous" },
-                        on: {
-                          click: function ($event) {
-                            return _vm.prevPage()
+                  _c(
+                    "li",
+                    {
+                      staticClass: "page-item",
+                      class: !_vm.links.prev ? "disabled" : "",
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#", "aria-label": "Previous" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.prevPage()
+                            },
                           },
                         },
-                      },
-                      [
-                        _c("span", { attrs: { "aria-hidden": "true" } }, [
-                          _vm._v("«"),
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "visually-hidden" }, [
-                          _vm._v("Previous"),
-                        ]),
-                      ]
-                    ),
-                  ]),
+                        [
+                          _c("span", { attrs: { "aria-hidden": "true" } }, [
+                            _vm._v("«"),
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "visually-hidden" }, [
+                            _vm._v("Previous"),
+                          ]),
+                        ]
+                      ),
+                    ]
+                  ),
                   _vm._v(" "),
                   _vm._l(_vm.meta.last_page, function (page) {
                     return [
@@ -41816,29 +41823,36 @@ var render = function () {
                     ]
                   }),
                   _vm._v(" "),
-                  _c("li", { staticClass: "page-item" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "page-link",
-                        attrs: { href: "#", "aria-label": "Next" },
-                        on: {
-                          click: function ($event) {
-                            return _vm.nextPage()
+                  _c(
+                    "li",
+                    {
+                      staticClass: "page-item",
+                      class: !_vm.links.next ? "disabled" : "",
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#", "aria-label": "Next" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.nextPage()
+                            },
                           },
                         },
-                      },
-                      [
-                        _c("span", { attrs: { "aria-hidden": "true" } }, [
-                          _vm._v("»"),
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "visually-hidden" }, [
-                          _vm._v("Next"),
-                        ]),
-                      ]
-                    ),
-                  ]),
+                        [
+                          _c("span", { attrs: { "aria-hidden": "true" } }, [
+                            _vm._v("»"),
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "visually-hidden" }, [
+                            _vm._v("Next"),
+                          ]),
+                        ]
+                      ),
+                    ]
+                  ),
                 ],
                 2
               ),

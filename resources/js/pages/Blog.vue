@@ -9,7 +9,7 @@
       <!-- Paginate -->
       <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center my-5">
-          <li class="page-item">
+          <li class="page-item" :class="!links.prev ? 'disabled' : ''">
             <a
               class="page-link"
               href="#"
@@ -31,7 +31,7 @@
             </li>
           </template>
 
-          <li class="page-item">
+          <li class="page-item" :class="!links.next ? 'disabled' : ''">
             <a class="page-link" href="#" @click="nextPage()" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
               <span class="visually-hidden">Next</span>
