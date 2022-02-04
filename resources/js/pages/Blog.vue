@@ -1,7 +1,38 @@
 <template>
   <div>
-    <h1>Blog 1</h1>
-    <BlogPosts :posts="posts"></BlogPosts>
+    <h1 v-if="loading">LOADING</h1>
+    <div v-else-if="error">ERROR</div>
+    <div v-else>
+      <h1>Blog 1</h1>
+      <BlogPosts :posts="posts"></BlogPosts>
+
+      <!-- Paginate -->
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center my-5">
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="#"
+              @click="prevPage()"
+              aria-label="Previous"
+            >
+              <span aria-hidden="true">&laquo;</span>
+              <span class="visually-hidden">Previous</span>
+            </a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link" href="#">{{ this.meta.current_page }}</a>
+          </li>
+
+          <li class="page-item">
+            <a class="page-link" href="#" @click="nextPage()" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="visually-hidden">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 
@@ -12,29 +43,44 @@ export default {
   data() {
     return {
       loading: true,
-      error: true,
+      error: false,
       posts: null,
       meta: null,
       links: null,
     };
   },
   methods: {
-    fetchApi() {
+    fetchData(page_link) {
+      let api_link = "api/posts";
+      if (page_link) {
+        api_link = page_link;
+      }
       axios
-        .get("api/posts")
+        .get(api_link)
         .then((r) => {
-          //   console.log(r);
           this.posts = r.data.data;
+          this.meta = r.data.meta;
+          this.links = r.data.links;
           this.loading = false;
+          //   console.log(this.meta.current_page);
         })
         .catch((e) => {
           console.error("Error:" + e);
           this.error = true;
         });
     },
+
+    nextPage() {
+      this.fetchData(this.links.next);
+    },
+    prevPage() {
+      console.log("prev page");
+      this.fetchData(this.links.prev);
+    },
   },
+
   mounted() {
-    this.fetchApi();
+    this.fetchData();
   },
 };
 </script>

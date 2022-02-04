@@ -5194,6 +5194,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -5202,28 +5233,42 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       loading: true,
-      error: true,
+      error: false,
       posts: null,
       meta: null,
       links: null
     };
   },
   methods: {
-    fetchApi: function fetchApi() {
+    fetchData: function fetchData(page_link) {
       var _this = this;
 
-      axios.get("api/posts").then(function (r) {
-        //   console.log(r);
+      var api_link = "api/posts";
+
+      if (page_link) {
+        api_link = page_link;
+      }
+
+      axios.get(api_link).then(function (r) {
         _this.posts = r.data.data;
-        _this.loading = false;
+        _this.meta = r.data.meta;
+        _this.links = r.data.links;
+        _this.loading = false; //   console.log(this.meta.current_page);
       })["catch"](function (e) {
         console.error("Error:" + e);
         _this.error = true;
       });
+    },
+    nextPage: function nextPage() {
+      this.fetchData(this.links.next);
+    },
+    prevPage: function prevPage() {
+      console.log("prev page");
+      this.fetchData(this.links.prev);
     }
   },
   mounted: function mounted() {
-    this.fetchApi();
+    this.fetchData();
   }
 });
 
@@ -5258,6 +5303,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -41608,7 +41657,7 @@ var render = function () {
                     staticClass: "btn btn-primary",
                     attrs: { to: "/blog/" + post.id },
                   },
-                  [_vm._v("See more...")]
+                  [_vm._v("\n            See more...\n          ")]
                 ),
               ],
               1
@@ -41689,15 +41738,85 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h1", [_vm._v("Blog 1")]),
-      _vm._v(" "),
-      _c("BlogPosts", { attrs: { posts: _vm.posts } }),
-    ],
-    1
-  )
+  return _c("div", [
+    _vm.loading
+      ? _c("h1", [_vm._v("LOADING")])
+      : _vm.error
+      ? _c("div", [_vm._v("ERROR")])
+      : _c(
+          "div",
+          [
+            _c("h1", [_vm._v("Blog 1")]),
+            _vm._v(" "),
+            _c("BlogPosts", { attrs: { posts: _vm.posts } }),
+            _vm._v(" "),
+            _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
+              _c(
+                "ul",
+                { staticClass: "pagination justify-content-center my-5" },
+                [
+                  _c("li", { staticClass: "page-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#", "aria-label": "Previous" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.prevPage()
+                          },
+                        },
+                      },
+                      [
+                        _c("span", { attrs: { "aria-hidden": "true" } }, [
+                          _vm._v("«"),
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "visually-hidden" }, [
+                          _vm._v("Previous"),
+                        ]),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "page-item active" }, [
+                    _c(
+                      "a",
+                      { staticClass: "page-link", attrs: { href: "#" } },
+                      [_vm._v(_vm._s(this.meta.current_page))]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "page-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#", "aria-label": "Next" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.nextPage()
+                          },
+                        },
+                      },
+                      [
+                        _c("span", { attrs: { "aria-hidden": "true" } }, [
+                          _vm._v("»"),
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "visually-hidden" }, [
+                          _vm._v("Next"),
+                        ]),
+                      ]
+                    ),
+                  ]),
+                ]
+              ),
+            ]),
+          ],
+          1
+        ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

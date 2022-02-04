@@ -21,9 +21,9 @@
                 >{{ tags.name }} -
               </span>
             </div>
-            <router-link :to="'/blog/' + post.id" class="btn btn-primary"
-              >See more...</router-link
-            >
+            <router-link :to="'/blog/' + post.id" class="btn btn-primary">
+              See more...
+            </router-link>
           </div>
         </div>
       </div>

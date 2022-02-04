@@ -4,20 +4,24 @@
     <div v-else-if="error">‼Error, try another record‼</div>
     <div v-else>
       <img :src="post.cover" alt="" width="50%" />
+
       <h1>{{ post.title }}</h1>
-      <span class="text-muted"
-        ><b>slug:</b><i>{{ post.slug }}</i></span
-      >
+
+      <span class="text-muted">
+        <b>slug:</b><i>{{ post.slug }}</i>
+      </span>
 
       <div>
         <b>Category:</b>{{ post.category ? post.category.name : "none" }}
       </div>
+
       <div>
         <b>Tags:</b>
         <template v-if="post.tags">
           <template v-for="tag in post.tags"> {{ tag.name }} | </template>
         </template>
       </div>
+
       <h2>{{ post.sub_title }}</h2>
       <p>{{ post.body }}</p>
     </div>
