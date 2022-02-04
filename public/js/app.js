@@ -5225,6 +5225,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -5263,8 +5270,11 @@ __webpack_require__.r(__webpack_exports__);
       this.fetchData(this.links.next);
     },
     prevPage: function prevPage() {
-      console.log("prev page");
       this.fetchData(this.links.prev);
+    },
+    goToPage: function goToPage(page_num) {
+      console.log(page_num);
+      this.fetchData("api/posts?page=" + page_num);
     }
   },
   mounted: function mounted() {
@@ -41779,13 +41789,32 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _c("li", { staticClass: "page-item active" }, [
-                    _c(
-                      "a",
-                      { staticClass: "page-link", attrs: { href: "#" } },
-                      [_vm._v(_vm._s(this.meta.current_page))]
-                    ),
-                  ]),
+                  _vm._l(_vm.meta.last_page, function (page) {
+                    return [
+                      _c(
+                        "li",
+                        {
+                          staticClass: "page-item",
+                          class: page === _vm.meta.current_page ? "active" : "",
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              attrs: { href: "#" },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.goToPage(page)
+                                },
+                              },
+                            },
+                            [_vm._v(_vm._s(page))]
+                          ),
+                        ]
+                      ),
+                    ]
+                  }),
                   _vm._v(" "),
                   _c("li", { staticClass: "page-item" }, [
                     _c(
@@ -41810,7 +41839,8 @@ var render = function () {
                       ]
                     ),
                   ]),
-                ]
+                ],
+                2
               ),
             ]),
           ],

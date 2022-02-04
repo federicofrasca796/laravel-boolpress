@@ -20,9 +20,16 @@
               <span class="visually-hidden">Previous</span>
             </a>
           </li>
-          <li class="page-item active">
-            <a class="page-link" href="#">{{ this.meta.current_page }}</a>
-          </li>
+          <template v-for="page in meta.last_page">
+            <li
+              class="page-item"
+              :class="page === meta.current_page ? 'active' : ''"
+            >
+              <a class="page-link" href="#" @click="goToPage(page)">{{
+                page
+              }}</a>
+            </li>
+          </template>
 
           <li class="page-item">
             <a class="page-link" href="#" @click="nextPage()" aria-label="Next">
@@ -74,8 +81,11 @@ export default {
       this.fetchData(this.links.next);
     },
     prevPage() {
-      console.log("prev page");
       this.fetchData(this.links.prev);
+    },
+    goToPage(page_num) {
+      console.log(page_num);
+      this.fetchData("api/posts?page=" + page_num);
     },
   },
 
